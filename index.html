@@ -3,10 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mortgage Repayment Calculator</title>
+    <title>Mortgage Calculator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet" />
     <script>
       tailwind.config = {
@@ -15,7 +13,6 @@
             colors: {
               lime: "hsl(61, 70%, 52%)",
               red: "hsl(4, 69%, 50%)",
-              white: "hsl(0, 0%, 100%)",
               slate: {
                 100: "hsl(202, 86%, 94%)",
                 300: "hsl(203, 41%, 72%)",
@@ -23,15 +20,15 @@
                 700: "hsl(200, 24%, 40%)",
                 900: "hsl(202, 55%, 16%)",
               },
+              white: "hsl(0, 0%, 100%)",
             },
             fontFamily: {
               jakarta: ["Plus Jakarta Sans", "sans-serif"],
             },
             boxShadow: {
-              calculator: "0 32px 56px 0 rgba(76, 103, 100, 0.16)",
+              calc: "0 32px 56px rgba(76,103,100,0.16)",
             },
             borderRadius: {
-              lg: "8px",
               xl: "16px",
               "2xl": "24px",
             },
@@ -39,162 +36,136 @@
         },
       };
     </script>
-    <style type="text/tailwindcss">
-      @layer utilities {
-        .sr-only {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          padding: 0;
-          margin: -1px;
-          overflow: hidden;
-          clip: rect(0, 0, 0, 0);
-          white-space: nowrap;
-          border: 0;
-        }
-      }
-    </style>
   </head>
-  <body class="font-jakarta bg-slate-100 text-slate-900 min-h-screen flex flex-col items-center justify-center p-4 md:p-6">
-    <div class="w-full max-w-5xl bg-white rounded-2xl shadow-calculator overflow-hidden">
-      <header class="bg-slate-900 text-white p-6 flex justify-between items-center">
-        <h1 class="text-2xl font-bold">Mortgage Calculator</h1>
-        <button
-          id="clearBtn"
-          class="text-lime font-bold underline underline-offset-2 hover:text-white focus:text-white focus:outline-none focus:ring-2 focus:ring-lime focus:ring-offset-2 focus:ring-offset-slate-900 transition-colors"
-        >
-          Clear All
-        </button>
-      </header>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 md:p-10">
-        <section class="space-y-6" aria-labelledby="form-title">
-          <h2 id="form-title" class="sr-only">Mortgage Details Form</h2>
+  <body class="bg-slate-100 font-jakarta flex items-center justify-center min-h-screen p-6">
+    <div class="bg-white rounded-2xl shadow-calc w-full max-w-5xl overflow-hidden grid lg:grid-cols-2">
+      <div class="p-8 md:p-10 space-y-6">
+        <div class="flex justify-between items-center">
+          <h1 class="text-2xl font-bold text-slate-900">Mortgage Calculator</h1>
+          <button id="clearBtn" class="font-normal underline underline-offset-2 text-slate-500 hover:text-slate-700 focus:outline-none">
+            Clear All
+          </button>
+        </div>
 
-          <div class="space-y-2">
-            <label for="mortgageAmount" class="block font-bold text-base">Mortgage Amount</label>
+        <div>
+          <label for="mortgageAmount" class="text-slate-500 block mb-2">Mortgage Amount</label>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">£</span>
+            <input
+              id="mortgageAmount"
+              type="number"
+              placeholder=""
+              min="0"
+              step="1000"
+              class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 hover:border-slate-700"
+            />
+          </div>
+          <p id="amountError" class="text-red text-sm hidden mt-1">This field is required</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="mortgageTerm" class="text-slate-500 block mb-2">Mortgage Term</label>
             <div class="relative">
-              <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-bold">£</span>
               <input
+                id="mortgageTerm"
                 type="number"
-                id="mortgageAmount"
-                placeholder="0"
-                min="0"
-                step="1000"
-                class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 hover:border-slate-500 transition-colors"
+                placeholder=""
+                min="1"
+                max="40"
+                class="w-full pr-16 py-3 px-4 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500"
               />
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">years</span>
             </div>
-            <div id="amountError" class="text-red text-sm hidden">This field is required</div>
+            <p id="termError" class="text-red text-sm hidden mt-1">This field is required</p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="space-y-2">
-              <label for="mortgageTerm" class="block font-bold text-base">Mortgage Term</label>
-              <div class="relative">
-                <input
-                  type="number"
-                  id="mortgageTerm"
-                  placeholder="0"
-                  min="1"
-                  max="40"
-                  class="w-full px-4 pr-16 py-3 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 hover:border-slate-500 transition-colors"
-                />
-                <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-bold">years</span>
-              </div>
-              <div id="termError" class="text-red text-sm hidden">This field is required</div>
+          <div>
+            <label for="interestRate" class="text-slate-500 block mb-2">Interest Rate</label>
+            <div class="relative">
+              <input
+                id="interestRate"
+                type="number"
+                placeholder=""
+                min="0"
+                max="100"
+                step="0.01"
+                class="w-full pr-12 py-3 px-4 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500"
+              />
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">%</span>
             </div>
-
-            <div class="space-y-2">
-              <label for="interestRate" class="block font-bold text-base">Interest Rate</label>
-              <div class="relative">
-                <input
-                  type="number"
-                  id="interestRate"
-                  placeholder="0"
-                  min="0"
-                  max="100"
-                  step="0.01"
-                  class="w-full px-4 pr-12 py-3 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 hover:border-slate-500 transition-colors"
-                />
-                <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-bold">%</span>
-              </div>
-              <div id="rateError" class="text-red text-sm hidden">This field is required</div>
-            </div>
+            <p id="rateError" class="text-red text-sm hidden mt-1">This field is required</p>
           </div>
+        </div>
 
-          <div class="space-y-2">
-            <label class="block font-bold text-base">Mortgage Type</label>
-            <div class="space-y-4 mt-2">
-              <div class="flex items-center space-x-4">
-                <input
-                  type="radio"
-                  id="repayment"
-                  name="mortgageType"
-                  value="repayment"
-                  class="w-5 h-5 text-slate-900 focus:ring-slate-500 hover:ring-2 hover:ring-slate-300 transition-all"
-                />
-                <label for="repayment" class="font-medium hover:text-slate-700 cursor-pointer transition-colors">Repayment</label>
-              </div>
-              <div class="flex items-center space-x-4">
-                <input
-                  type="radio"
-                  id="interestOnly"
-                  name="mortgageType"
-                  value="interestOnly"
-                  class="w-5 h-5 text-slate-900 focus:ring-slate-500 hover:ring-2 hover:ring-slate-300 transition-all"
-                />
-                <label for="interestOnly" class="font-medium hover:text-slate-700 cursor-pointer transition-colors">Interest Only</label>
-              </div>
-            </div>
-            <div id="typeError" class="text-red text-sm hidden">This field is required</div>
+        <div>
+          <label class="text-slate-500 block mb-3">Mortgage Type</label>
+          <div class="space-y-4">
+            <label
+              for="repayment"
+              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:border-lime transition-colors peer-checked:border-lime peer-checked:bg-lime/30"
+            >
+              <input type="radio" name="mortgageType" id="repayment" value="repayment" class="peer w-5 h-5 accent-slate-900 focus:ring-slate-500" />
+              <span class="font-bold text-slate-900">Repayment</span>
+            </label>
+
+            <label
+              for="interestOnly"
+              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:border-lime transition-colors peer-checked:border-lime peer-checked:bg-lime/30"
+            >
+              <input
+                type="radio"
+                name="mortgageType"
+                id="interestOnly"
+                value="interestOnly"
+                class="peer w-5 h-5 accent-slate-900 focus:ring-slate-500"
+              />
+              <span class="font-bold text-slate-900">Interest Only</span>
+            </label>
           </div>
+          <p id="typeError" class="text-red text-sm hidden mt-1">This field is required</p>
+        </div>
 
+        <div class="pt-2">
           <button
             id="calculateBtn"
-            class="w-full bg-slate-900 text-white font-bold py-3 px-6 rounded-lg hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition-colors mt-2"
+            class="flex items-center gap-2 bg-lime text-slate-900 font-bold py-3 px-6 rounded-2xl hover:bg-lime-50 focus:ring-2 focus:ring-slate-500 transition"
           >
-            Calculate Repayments
+            <img src="./assets/images/icon-calculator.svg" alt="Calculator icon" class="w-5 h-5" />
+            <span>Calculate Repayments</span>
           </button>
-        </section>
+        </div>
+      </div>
 
-        <section class="bg-slate-900 text-white rounded-xl p-6 md:p-10 flex flex-col min-h-[400px]" aria-live="polite" aria-atomic="true">
-          <div id="emptyResults" class="flex flex-col items-center justify-center text-center space-y-6 flex-1">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="32" fill="#F4F8FA" />
-              <path d="M27.2 44H36.8V42.4H27.2V44ZM24 32.8H40V31.2H24V32.8ZM22.4 21.6H41.6V20H22.4V21.6Z" fill="#9DB3BE" />
-            </svg>
-            <h2 class="text-xl font-bold">Results shown here</h2>
-            <p class="text-slate-300 max-w-xs">Complete the form and click "calculate repayments" to see what your monthly repayments would be.</p>
-          </div>
+      <div class="bg-slate-900 text-white p-8 md:p-10 flex flex-col justify-center rounded-t-2xl lg:rounded-none lg:rounded-r-2xl">
+        <div id="emptyResults" class="flex flex-col items-center text-center space-y-6">
+          <img src="./assets/images/illustration-empty.svg" alt="illustration-empty" />
+          <h2 class="text-xl font-bold">Results shown here</h2>
+          <p class="text-slate-300 max-w-md">Complete the form and click “calculate repayments” to see what your monthly repayments would be.</p>
+        </div>
 
-          <div id="completedResults" class="hidden flex-1">
-            <div class="flex justify-between items-center mb-4">
-              <h2 class="text-xl font-bold">Your results</h2>
+        <div id="completedResults" class="hidden">
+          <h2 class="text-xl font-bold mb-2">Your results</h2>
+          <p class="text-slate-300 mb-6">
+            Your results are shown below based on the information you provided. To adjust, edit the form and recalculate.
+          </p>
+          <div class="h-px bg-slate-700 my-6"></div>
+          <div class="space-y-6">
+            <div>
+              <p class="text-slate-300">Your monthly repayments</p>
+              <p id="monthlyRepayment" class="text-lime text-5xl font-bold">£1,797.74</p>
             </div>
-            <p class="text-slate-300 mb-6">
-              Your results are shown below based on the information you provided. To adjust the results, edit the form and click "calculate
-              repayments" again.
-            </p>
-
-            <div class="h-px bg-slate-700 my-6"></div>
-
-            <div class="space-y-6">
-              <div>
-                <p class="text-slate-300 text-base">Your monthly repayments</p>
-                <p id="monthlyRepayment" class="text-lime text-4xl md:text-5xl font-bold">£1,797.74</p>
-              </div>
-              <div>
-                <p class="text-slate-300 text-base">Total you'll repay over the term</p>
-                <p id="totalRepayment" class="text-white text-2xl font-bold">£539,322.94</p>
-              </div>
+            <div>
+              <p class="text-slate-300">Total you’ll repay over the term</p>
+              <p id="totalRepayment" class="text-white text-2xl font-bold">£539,322.94</p>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </div>
 
-    <div id="srAnnouncement" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-
+    <div id="srAnnouncement" class="sr-only" aria-live="polite"></div>
     <script src="./src/main.js"></script>
   </body>
 </html>
