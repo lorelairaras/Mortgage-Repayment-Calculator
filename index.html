@@ -109,18 +109,18 @@
           <div class="space-y-4">
             <label
               for="repayment"
-              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:bg-lime-50 hover:border-lime transition-colors peer-checked:border-lime peer-checked:bg-lime/50 focus-within:border-lime"
+              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:bg-lime/50 hover:border-lime transition-colors peer-checked:border-lime/50 peer-checked:bg-lime/50 focus-within:border-lime"
             >
-              <input type="radio" name="mortgageType" id="repayment" value="repayment" class="peer w-5 h-5 accent-slate-900 focus:ring-lime" />
-              <span class="font-bold text-slate-900">Repayment</span>
+              <input type="radio" name="mortgageType" id="repayment" value="repayment" class="peer w-5 h-5 accent-lime focus:ring-lime" />
+              <span class="peer-checked:bg-lime-100 font-bold text-slate-900">Repayment</span>
             </label>
 
             <label
               for="interestOnly"
-              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:bg-lime-50 hover:border-lime transition-colors peer-checked:border-lime peer-checked:bg-lime/50 focus-within:border-lime"
+              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:bg-lime/50 hover:border-lime transition-colors peer-checked:border-lime/50 peer-checked:bg-lime/50 focus-within:border-lime"
             >
-              <input type="radio" name="mortgageType" id="interestOnly" value="interestOnly" class="peer w-5 h-5 accent-slate-900 focus:ring-lime" />
-              <span class="font-bold text-slate-900">Interest Only</span>
+              <input type="radio" name="mortgageType" id="interestOnly" value="interestOnly" class="peer w-5 h-5 accent-lime focus:ring-lime" />
+              <span class="peer-checked:bg-lime-100 font-bold text-slate-900">Interest Only</span>
             </label>
           </div>
           <p id="typeError" class="text-red text-sm hidden mt-1">This field is required</p>
@@ -137,7 +137,9 @@
         </div>
       </div>
 
-      <div class="bg-slate-900 text-white p-8 md:p-10 flex flex-col justify-center rounded-b-[32px] lg:rounded-none lg:rounded-r-2xl">
+      <div
+        class="bg-slate-900 text-white p-8 md:p-10 flex flex-col justify-center rounded-b-[32px] lg:rounded-none lg:rounded-r-2xl lg:rounded-b-[75px]"
+      >
         <div id="emptyResults" class="flex flex-col items-center text-center space-y-6">
           <img src="./assets/images/illustration-empty.svg" alt="illustration-empty" />
           <h2 class="text-xl font-bold">Results shown here</h2>
