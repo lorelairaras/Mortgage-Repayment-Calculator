@@ -59,7 +59,7 @@
               type="number"
               min="0"
               step="1000"
-              class="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-lime focus:border-lime"
+              class="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-1 focus:ring-lime focus:border-lime"
             />
           </div>
           <p id="amountError" class="text-red text-sm hidden mt-1">This field is required</p>
@@ -74,7 +74,7 @@
                 type="number"
                 min="1"
                 max="40"
-                class="w-full pr-16 py-3 pl-4 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-lime focus:border-lime"
+                class="w-full pr-16 py-3 pl-4 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-1 focus:ring-lime focus:border-lime"
               />
               <span
                 class="absolute right-0 top-0 bottom-0 flex items-center justify-center w-16 font-bold text-slate-500 border border-slate-300 rounded-r-lg bg-slate-100 group-focus-within:border-lime group-focus-within:bg-lime/30"
@@ -93,7 +93,7 @@
                 min="0"
                 max="100"
                 step="0.01"
-                class="w-full pr-12 py-3 pl-4 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-lime focus:border-lime"
+                class="w-full pr-12 py-3 pl-4 border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-1 focus:ring-lime focus:border-lime"
               />
               <span
                 class="absolute right-0 top-0 bottom-0 flex items-center justify-center w-12 font-bold text-slate-500 border border-slate-300 rounded-r-lg bg-slate-100 group-focus-within:border-lime group-focus-within:bg-lime/30"
@@ -109,7 +109,7 @@
           <div class="space-y-4">
             <label
               for="repayment"
-              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:border-lime transition-colors peer-checked:border-lime peer-checked:bg-lime/50 focus-within:border-lime"
+              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:bg-lime-50 hover:border-lime transition-colors peer-checked:border-lime peer-checked:bg-lime/50 focus-within:border-lime"
             >
               <input type="radio" name="mortgageType" id="repayment" value="repayment" class="peer w-5 h-5 accent-slate-900 focus:ring-lime" />
               <span class="font-bold text-slate-900">Repayment</span>
@@ -117,7 +117,7 @@
 
             <label
               for="interestOnly"
-              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:border-lime transition-colors peer-checked:border-lime peer-checked:bg-lime/50 focus-within:border-lime"
+              class="flex items-center gap-3 border border-slate-300 rounded-lg px-4 py-4 cursor-pointer hover:bg-lime-50 hover:border-lime transition-colors peer-checked:border-lime peer-checked:bg-lime/50 focus-within:border-lime"
             >
               <input type="radio" name="mortgageType" id="interestOnly" value="interestOnly" class="peer w-5 h-5 accent-slate-900 focus:ring-lime" />
               <span class="font-bold text-slate-900">Interest Only</span>
@@ -129,7 +129,7 @@
         <div class="pt-2">
           <button
             id="calculateBtn"
-            class="flex items-center gap-2 bg-lime text-slate-900 font-bold py-3 px-6 rounded-2xl hover:bg-lime-50 focus:ring-2 focus:ring-slate-500 transition"
+            class="flex items-center gap-2 bg-lime text-slate-900 font-bold py-3 px-6 rounded-2xl hover:bg-lime-50 focus:ring-1 transition"
           >
             <img src="./assets/images/icon-calculator.svg" alt="Calculator icon" class="w-5 h-5" />
             <span>Calculate Repayments</span>
